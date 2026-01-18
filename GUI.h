@@ -36,6 +36,7 @@ namespace chessMTUCI {
 		}
 	private: System::Windows::Forms::Label^ label1;
 		   System::Windows::Forms::PictureBox^ picMtuci;
+	private: System::Windows::Forms::Button^ button1;
 
 	protected:
 
@@ -55,6 +56,7 @@ namespace chessMTUCI {
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -62,18 +64,30 @@ namespace chessMTUCI {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 26.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(292, 43);
+			this->label1->Location = System::Drawing::Point(389, 53);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(197, 39);
+			this->label1->Size = System::Drawing::Size(250, 52);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ØÀÕÌÀÒÛ";
+			//
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(398, 436);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(233, 75);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// GUI
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(791, 567);
+			this->ClientSize = System::Drawing::Size(1055, 698);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"GUI";
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &GUI::MyForm_Load);
