@@ -35,7 +35,7 @@ namespace chessMTUCI {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	System::Windows::Forms::PictureBox
+		   System::Windows::Forms::PictureBox^ picMtuci;
 
 	protected:
 
