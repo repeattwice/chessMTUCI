@@ -35,6 +35,8 @@ namespace chessMTUCI {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
+	System::Windows::Forms::PictureBox
+
 	protected:
 
 	protected:
@@ -66,13 +68,13 @@ namespace chessMTUCI {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ØÀÕÌÀÒÛ";
 			// 
-			// MyForm
+			// GUI
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(791, 567);
 			this->Controls->Add(this->label1);
-			this->Name = L"MyForm";
+			this->Name = L"GUI";
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &GUI::MyForm_Load);
 			this->ResumeLayout(false);
