@@ -38,6 +38,8 @@ namespace chessMTUCI {
 	private: System::Windows::Forms::Label^ lblMove;
 	private: System::Windows::Forms::Label^ lblMoveNumber;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Button^ btnClose;
+
 
 	protected:
 
@@ -55,6 +57,7 @@ namespace chessMTUCI {
 			this->lblMove = (gcnew System::Windows::Forms::Label());
 			this->lblMoveNumber = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->btnClose = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -89,15 +92,32 @@ namespace chessMTUCI {
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
 			// 
+			// btnClose
+			// 
+			this->btnClose->BackColor = System::Drawing::Color::Red;
+			this->btnClose->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnClose->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->btnClose->Location = System::Drawing::Point(834, -1);
+			this->btnClose->Name = L"btnClose";
+			this->btnClose->Size = System::Drawing::Size(30, 34);
+			this->btnClose->TabIndex = 4;
+			this->btnClose->Text = L"X";
+			this->btnClose->UseVisualStyleBackColor = false;
+			this->btnClose->Click += gcnew System::EventHandler(this, &Game::btnClose_Click);
+			// 
 			// Game
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(864, 753);
+			this->ControlBox = false;
+			this->Controls->Add(this->btnClose);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->lblMoveNumber);
 			this->Controls->Add(this->lblMove);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"Game";
@@ -111,5 +131,8 @@ namespace chessMTUCI {
 #pragma endregion
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void btnClose_Click(System::Object^ sender, System::EventArgs^ e) {
+	Application::Exit();
+}
 };
 }
