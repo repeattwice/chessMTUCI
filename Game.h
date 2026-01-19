@@ -34,7 +34,7 @@ namespace chessMTUCI {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	private: System::Windows::Forms::Label^ lblMove;
 	private: System::Windows::Forms::Label^ lblMoveNumber;
 
@@ -51,24 +51,9 @@ namespace chessMTUCI {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Game::typeid));
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->lblMove = (gcnew System::Windows::Forms::Label());
 			this->lblMoveNumber = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->BackColor = System::Drawing::SystemColors::Menu;
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(9, 10);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(526, 570);
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Click += gcnew System::EventHandler(this, &Game::pictureBox1_Click);
-			this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			// 
 			// lblMove
 			// 
@@ -102,13 +87,11 @@ namespace chessMTUCI {
 			this->ClientSize = System::Drawing::Size(648, 612);
 			this->Controls->Add(this->lblMoveNumber);
 			this->Controls->Add(this->lblMove);
-			this->Controls->Add(this->pictureBox1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Game";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Шахматы";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
