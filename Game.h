@@ -18,13 +18,43 @@ namespace chessMTUCI {
 		Game(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: добавьте код конструктора
-			//
+			AddPictureBoxesToTableLayout();
 		}
+		PictureBox^ GetChessCell(int row, int col);
 
+		void AddPictureBoxesToTableLayout() {
+			this->tableLayoutPanel1->Controls->Clear();
+			this->tableLayoutPanel1->BackColor = Color::Transparent;
+			this->tableLayoutPanel1->CellBorderStyle = TableLayoutPanelCellBorderStyle::None;
+			chessCell = gcnew array<PictureBox^, 2>(8, 8);
+			for (int row = 0; row < 8; row++) {
+				for (int col = 0; col < 8; col++) {
+					PictureBox^ cell = gcnew PictureBox();
+					cell->Dock = DockStyle::Fill;
+					cell->Margin = System::Windows::Forms::Padding(0);
+					cell->Padding = System::Windows::Forms::Padding(0);
+					cell->Name = String::Format("cell_{0}_{1}", row, col);
+					if ((row + col) % 2 == 0) {
+						cell->BackColor = Color::FromArgb(180, Color::Purple);
+					}
+					else {
+						cell->BackColor = Color::FromArgb(180, Color::Violet);
+					}
+					cell->BorderStyle = BorderStyle::FixedSingle;
+					cell->Tag = gcnew Tuple<int, int>(row, col);
+
+					cell->Click += gcnew System::EventHandler(this, &Game::chessCell_Click);
+					cell->MouseEnter += gcnew EventHandler(this, &Game::chessCell_MouseEnter);
+					cell->MouseLeave += gcnew EventHandler(this, &Game::chessCell_MouseLeave);
+					cell->Cursor = Cursors::Hand;
+					chessCell[row, col] = cell;
+
+					this->tableLayoutPanel1->Controls->Add(cell, col, row);
+				}
+			}
+		}
 	protected:
-		/// <summary>
+		cli::array<PictureBox^, 2>^ chessCell;
 		/// Освободить все используемые ресурсы.
 		/// </summary>
 		~Game()
@@ -39,6 +69,7 @@ namespace chessMTUCI {
 	private: System::Windows::Forms::Label^ lblMoveNumber;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Button^ btnClose;
+	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
 
 
 	protected:
@@ -58,6 +89,7 @@ namespace chessMTUCI {
 			this->lblMoveNumber = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->btnClose = (gcnew System::Windows::Forms::Button());
+			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -66,9 +98,10 @@ namespace chessMTUCI {
 			this->lblMove->AutoSize = true;
 			this->lblMove->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMove->Location = System::Drawing::Point(715, 34);
+			this->lblMove->Location = System::Drawing::Point(536, 28);
+			this->lblMove->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblMove->Name = L"lblMove";
-			this->lblMove->Size = System::Drawing::Size(64, 29);
+			this->lblMove->Size = System::Drawing::Size(50, 24);
 			this->lblMove->TabIndex = 1;
 			this->lblMove->Text = L"Ход:";
 			// 
@@ -77,18 +110,21 @@ namespace chessMTUCI {
 			this->lblMoveNumber->AutoSize = true;
 			this->lblMoveNumber->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMoveNumber->Location = System::Drawing::Point(785, 34);
+			this->lblMoveNumber->Location = System::Drawing::Point(589, 28);
+			this->lblMoveNumber->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblMoveNumber->Name = L"lblMoveNumber";
-			this->lblMoveNumber->Size = System::Drawing::Size(26, 29);
+			this->lblMoveNumber->Size = System::Drawing::Size(20, 24);
 			this->lblMoveNumber->TabIndex = 2;
 			this->lblMoveNumber->Text = L"1";
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(12, 12);
+			this->pictureBox1->Location = System::Drawing::Point(9, 11);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(642, 641);
+			this->pictureBox1->Size = System::Drawing::Size(482, 520);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -98,28 +134,64 @@ namespace chessMTUCI {
 			this->btnClose->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnClose->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->btnClose->Location = System::Drawing::Point(834, -1);
+			this->btnClose->Location = System::Drawing::Point(626, -1);
+			this->btnClose->Margin = System::Windows::Forms::Padding(2);
 			this->btnClose->Name = L"btnClose";
-			this->btnClose->Size = System::Drawing::Size(30, 34);
+			this->btnClose->Size = System::Drawing::Size(22, 28);
 			this->btnClose->TabIndex = 4;
 			this->btnClose->Text = L"X";
 			this->btnClose->UseVisualStyleBackColor = false;
 			this->btnClose->Click += gcnew System::EventHandler(this, &Game::btnClose_Click);
 			// 
+			// tableLayoutPanel1
+			// 
+			this->tableLayoutPanel1->ColumnCount = 8;
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->tableLayoutPanel1->Location = System::Drawing::Point(9, 10);
+			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
+			this->tableLayoutPanel1->RowCount = 8;
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(482, 521);
+			this->tableLayoutPanel1->TabIndex = 5;
+			this->tableLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Game::tableLayoutPanel1_Paint);
+			// 
 			// Game
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->ClientSize = System::Drawing::Size(864, 753);
+			this->ClientSize = System::Drawing::Size(648, 612);
 			this->ControlBox = false;
 			this->Controls->Add(this->btnClose);
+			this->Controls->Add(this->tableLayoutPanel1);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->lblMoveNumber);
 			this->Controls->Add(this->lblMove);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Game";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Шахматы";
@@ -134,5 +206,14 @@ namespace chessMTUCI {
 private: System::Void btnClose_Click(System::Object^ sender, System::EventArgs^ e) {
 	Application::Exit();
 }
+private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void chessCell_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void chessCell_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void chessCell_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
+

@@ -126,10 +126,10 @@ namespace chessMTUCI {
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1044, 695);
 			this->ControlBox = false;
-			this->Controls->Add(this->label1);
 			this->Controls->Add(this->Gstart);
 			this->Controls->Add(this->Exit);
 			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(4);
