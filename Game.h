@@ -68,6 +68,7 @@ namespace chessMTUCI {
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &Game::pictureBox1_Click);
+			this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			// 
 			// lblMove
 			// 
