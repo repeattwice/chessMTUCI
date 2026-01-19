@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Game.h"
 
 namespace chessMTUCI {
 
@@ -141,6 +142,7 @@ namespace chessMTUCI {
 			this->Controls->Add(this->Exit);
 			this->picMtuci->SendToBack();
 			this->Name = L"GUI";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Øàõìàòû ÌÒÓÑÈ";
 			this->Load += gcnew System::EventHandler(this, &GUI::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picMtuci))->EndInit();
@@ -155,6 +157,9 @@ namespace chessMTUCI {
 		this->Close();
 	}
 	private: System::Void Gstart_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Hide();
+		Game^ gameForm = gcnew Game();
+		gameForm->Show();
 	}
 	};
 }
