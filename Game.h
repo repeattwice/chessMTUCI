@@ -47,9 +47,6 @@ namespace chessMTUCI {
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// “ребуемый метод дл€ поддержки конструктора Ч не измен€йте 
-		/// содержимое этого метода с помощью редактора кода.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -64,20 +61,23 @@ namespace chessMTUCI {
 			// 
 			this->pictureBox1->BackColor = System::Drawing::SystemColors::Menu;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(12, 12);
+			this->pictureBox1->Location = System::Drawing::Point(9, 10);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(701, 701);
+			this->pictureBox1->Size = System::Drawing::Size(526, 570);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &Game::pictureBox1_Click);
 			// 
 			// lblMove
 			// 
 			this->lblMove->AutoSize = true;
 			this->lblMove->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMove->Location = System::Drawing::Point(762, 34);
+			this->lblMove->Location = System::Drawing::Point(572, 28);
+			this->lblMove->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblMove->Name = L"lblMove";
-			this->lblMove->Size = System::Drawing::Size(64, 29);
+			this->lblMove->Size = System::Drawing::Size(50, 24);
 			this->lblMove->TabIndex = 1;
 			this->lblMove->Text = L"’од:";
 			// 
@@ -86,22 +86,24 @@ namespace chessMTUCI {
 			this->lblMoveNumber->AutoSize = true;
 			this->lblMoveNumber->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMoveNumber->Location = System::Drawing::Point(823, 34);
+			this->lblMoveNumber->Location = System::Drawing::Point(617, 28);
+			this->lblMoveNumber->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblMoveNumber->Name = L"lblMoveNumber";
-			this->lblMoveNumber->Size = System::Drawing::Size(26, 29);
+			this->lblMoveNumber->Size = System::Drawing::Size(20, 24);
 			this->lblMoveNumber->TabIndex = 2;
 			this->lblMoveNumber->Text = L"1";
 			// 
 			// Game
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(882, 753);
+			this->ClientSize = System::Drawing::Size(648, 612);
 			this->Controls->Add(this->lblMoveNumber);
 			this->Controls->Add(this->lblMove);
 			this->Controls->Add(this->pictureBox1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Game";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Ўахматы";
@@ -111,5 +113,7 @@ namespace chessMTUCI {
 
 		}
 #pragma endregion
-	};
+	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

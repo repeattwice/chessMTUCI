@@ -94,7 +94,7 @@ namespace chessMTUCI {
 					this->picMtuci->Image = Image::FromFile(imagePath);
 				}
 				else {
-					imagePath = L"C:\\Projects\\alg\\chessMTUCI\\mtuci.jpg";
+					imagePath = L"C:\\Projects\\alg\\chessMTUCI\\images\\mtuci.jpg";
 					if (System::IO::File::Exists(imagePath)) {
 						this->picMtuci->Image = Image::FromFile(imagePath);
 					}
