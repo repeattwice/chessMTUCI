@@ -1,42 +1,50 @@
 #pragma once
-#include <string>
-#include "Game.h"
-
+namespace System {
+	namespace Drawing {
+		ref class Image;
+	}
+}
 using namespace System;
-using namespace System::Drawing;
-
 namespace chessMtuci {
 	public ref class Figure {
-	protected:
+	private:
 		int row;
 		int colomn;
-		bool color;
+		bool color;// 0 - белый, 1 - черный
 		String^ FigureName;
-		Image^ FigureImage;
+		System::Drawing::Image^ figureImage;
+
 	public:
+		array <Tuple <int, int>^>^ PosibleMoves;
 		Figure(int startRow, int startCol, bool isWhite, String^ name);
 
-		property int Row {
+		property int Row{
 			int get();
 			void set(int v);
 		}
-		property int Col {
-			int get();
-			void set(int v);
+			property int Col{
+				int get();
+				void set(int v);
 		}
-		property Tuple<int, int> Position {
-			Tuple<int, int> get();
-			void set(Tuple<int, int>^ pos);
+			property Tuple<int, int>^ Position{
+				Tuple<int, int> ^ get();
+				void set(Tuple<int, int>^ pos);
 		}
-		property bool IsWhite {
-			bool get();
+			property bool IsWhite{
+				bool get();
 		}
-		property String^ Name {
-			String^ get();
-			void set(String^ v);
+			property String^ Name{
+				String ^ get();
+		}
+			property System::Drawing::Image^ FigureImage{
+				System::Drawing::Image ^ get();
+				void set(System::Drawing::Image^ link);
 		}
 
+
+		void Highlite();
 		void MoveTo(int newRow, int newCol);// выполняет ход в выбранную клетку
 		bool CanMoveByRules();//при нажатии на фигуру подсвесивает её 
+		void LoadFigureImage();// для подгрузки картинок
 	};
 }

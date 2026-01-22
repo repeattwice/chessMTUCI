@@ -1,4 +1,5 @@
 #pragma once
+#include "FugureClass.h"
 
 namespace chessMTUCI {
 
@@ -7,7 +8,6 @@ namespace chessMTUCI {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
-	using namespace System::Drawing;
 
 	/// <summary>
 	/// Сводка для Game
@@ -19,12 +19,16 @@ namespace chessMTUCI {
 		{
 			InitializeComponent();
 			AddPictureBoxesToTableLayout();
+			InitializaBoard();
+			DrawFigyres();
 		}
 		PictureBox^ GetChessCell(int row, int col);
 
+		array<chessMtuci::Figure^, 2>^ BoardFigures;
+
 		void AddPictureBoxesToTableLayout() {
 			this->tableLayoutPanel1->Controls->Clear();
-			this->tableLayoutPanel1->BackColor = Color::Transparent;
+			this->tableLayoutPanel1->BackColor = System::Drawing::Color::Transparent;
 			this->tableLayoutPanel1->CellBorderStyle = TableLayoutPanelCellBorderStyle::None;
 			chessCell = gcnew array<PictureBox^, 2>(8, 8);
 			for (int row = 0; row < 8; row++) {
@@ -35,10 +39,10 @@ namespace chessMTUCI {
 					cell->Padding = System::Windows::Forms::Padding(0);
 					cell->Name = String::Format("cell_{0}_{1}", row, col);
 					if ((row + col) % 2 == 0) {
-						cell->BackColor = Color::FromArgb(180, Color::Purple);
+						cell->BackColor = System::Drawing::Color::FromArgb(180, System::Drawing::Color::Purple);
 					}
 					else {
-						cell->BackColor = Color::FromArgb(180, Color::Violet);
+						cell->BackColor = System::Drawing::Color::FromArgb(180, System::Drawing::Color::Violet);
 					}
 					cell->BorderStyle = BorderStyle::FixedSingle;
 					cell->Tag = gcnew Tuple<int, int>(row, col);
@@ -53,6 +57,61 @@ namespace chessMTUCI {
 				}
 			}
 		}
+
+		void InitializaBoard() {
+			BoardFigures = gcnew array<chessMtuci::Figure^, 2>(8, 8);
+
+			BoardFigures[7, 0] = gcnew chessMtuci::Figure(7, 0, true, "rookWhite");
+			BoardFigures[7, 7] = gcnew chessMtuci::Figure(7, 7, true, "rookWhite");
+
+			BoardFigures[7, 1] = gcnew chessMtuci::Figure(7, 1, true, "knightWhite");
+			BoardFigures[7, 6] = gcnew chessMtuci::Figure(7, 6, true, "knightWhite");
+
+			BoardFigures[7, 2] = gcnew chessMtuci::Figure(7, 2, true, "bishopWhite");
+			BoardFigures[7, 5] = gcnew chessMtuci::Figure(7, 5, true, "bishopWhite");
+
+			BoardFigures[7, 3] = gcnew chessMtuci::Figure(7, 3, true, "queenWhite");
+			BoardFigures[7, 4] = gcnew chessMtuci::Figure(7, 4, true, "kingWhite");
+
+			for (int col = 0; col < 8; col++) {
+				BoardFigures[6, col] = gcnew chessMtuci::Figure(6, col, true, "pawnWhite");
+			}
+
+
+			BoardFigures[0, 0] = gcnew chessMtuci::Figure(0, 0, false, "rookBlack");
+			BoardFigures[0, 7] = gcnew chessMtuci::Figure(0, 7, false, "rookBlack");
+
+			BoardFigures[0, 1] = gcnew chessMtuci::Figure(0, 1, false, "knightBlack");
+			BoardFigures[0, 6] = gcnew chessMtuci::Figure(0, 6, false, "knightBlack");
+
+			BoardFigures[0, 2] = gcnew chessMtuci::Figure(0, 2, false, "bishopBlack");
+			BoardFigures[0, 5] = gcnew chessMtuci::Figure(0, 5, false, "bishopBlack");
+
+			BoardFigures[0, 3] = gcnew chessMtuci::Figure(0, 3, false, "queenBlack");
+			BoardFigures[0, 4] = gcnew chessMtuci::Figure(0, 4, false, "kingBlack");
+
+			for (int col = 0; col < 8; col++) {
+				BoardFigures[1, col] = gcnew chessMtuci::Figure(1, col, false, "pawnBlack");
+			}
+		}
+
+		void DrawFigyres() {
+			for (int row = 0; row < 8; row++) {
+				for (int col = 0; col < 8; col++) {
+					chessMtuci::Figure^ figure = BoardFigures[row, col];
+					PictureBox^ cell = chessCell[row, col];
+
+					if (figure != nullptr) {
+						cell->Image = figure->FigureImage;
+						cell->SizeMode = PictureBoxSizeMode::CenterImage;
+					}
+					else {
+						cell->Image = nullptr;
+					}
+				}
+			}
+		}
+
 	protected:
 		cli::array<PictureBox^, 2>^ chessCell;
 		/// Освободить все используемые ресурсы.
