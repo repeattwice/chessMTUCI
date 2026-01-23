@@ -338,14 +338,95 @@ private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Wi
 			if (frow < 7 && BoardFigures[frow + 1, fcol] == nullptr) {
 				Highlight(frow + 1, fcol);
 			}
-			if (frow > 0 && fcol < 7 && BoardFigures[frow + 1, fcol + 1] != nullptr) {
+			if (frow < 7 && fcol < 7 && BoardFigures[frow + 1, fcol + 1] != nullptr) {
 				if (BoardFigures[frow + 1, fcol + 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
 					Highlight(frow + 1, fcol + 1);
 				}
 			}
-			if (frow > 0 && fcol > 0 && BoardFigures[frow + 1, fcol - 1] != nullptr) {
+			if (frow <7 && fcol > 0 && BoardFigures[frow + 1, fcol - 1] != nullptr) {
 				if (BoardFigures[frow + 1, fcol - 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
 					Highlight(frow + 1, fcol - 1);
+				}
+			}
+		}
+		if (Obj->Contains("rook")) {
+			int NewRow = frow - 1;
+			while (NewRow >= 0) {
+				if (BoardFigures[NewRow, fcol] == nullptr) {
+					Highlight(NewRow, fcol);
+					NewRow -= 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[NewRow, fcol]->IsWhite) {
+					Highlight(NewRow, fcol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow + 1;
+			while (NewRow < 8) {
+				if (BoardFigures[NewRow, fcol] == nullptr) {
+					Highlight(NewRow, fcol);
+					NewRow += 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[NewRow, fcol]->IsWhite) {
+					Highlight(NewRow, fcol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			int NewCol = fcol - 1;
+			while (NewCol >= 0) {
+				if (BoardFigures[frow, NewCol] == nullptr) {
+					Highlight(frow, NewCol);
+					NewCol -= 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[frow, NewCol]->IsWhite) {
+					Highlight(frow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewCol = fcol + 1;
+			while (NewCol < 8) {
+				if (BoardFigures[frow, NewCol] == nullptr) {
+					Highlight(frow, NewCol);
+					NewCol += 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[frow, NewCol]->IsWhite) {
+					Highlight(frow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if (Obj->Contains("knight")) {
+			cli::array<int, 2>^ KnighMoves;
+			KnighMoves = gcnew array<int, 2>(8, 2) {
+				{ -2, 1 },
+				{ -2, -1 },
+				{ 2, 1 },
+				{ 2, -1 },
+				{ 1, 2 },
+				{ 1, -2 },
+				{ -1, 2},
+				{-1, -2 }
+			};
+			for (int i = 0; i < 8; i++) {
+				if (frow + KnighMoves[i, 0] >= 0 && frow + KnighMoves[i, 0] < 8 && fcol + KnighMoves[i, 1] >= 0 && fcol + KnighMoves[i, 1] < 8) {
+					if (BoardFigures[frow + KnighMoves[i, 0], fcol + KnighMoves[i, 1]] == nullptr) {
+						Highlight(frow + KnighMoves[i, 0], fcol + KnighMoves[i, 1]);
+					}
+					else if (BoardFigures[frow + KnighMoves[i, 0], fcol + KnighMoves[i, 1]]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+						Highlight(frow + KnighMoves[i, 0], fcol + KnighMoves[i, 1]);
+					}
 				}
 			}
 		}
