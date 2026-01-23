@@ -21,6 +21,12 @@ namespace chessMTUCI {
 			AddPictureBoxesToTableLayout();
 			InitializaBoard();
 			DrawFigyres();
+			highlightedCells = gcnew array<bool, 2>(8, 8);
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					highlightedCells[i, j] = false;
+				}
+			}
 		}
 		PictureBox^ GetChessCell(int row, int col);
 
@@ -259,6 +265,40 @@ namespace chessMTUCI {
 			this->PerformLayout();
 
 		}
+		void ClearHighLights() {
+			for (int r = 0; r < 8; r++) {
+				for (int c = 0; c < 8; c++) {
+					highlightedCells[r, c] = false;
+					if ((r + c) % 2 == 0) {
+						chessCell[r, c]->BackColor = System::Drawing::Color::FromArgb(180, System::Drawing::Color::Purple);
+					}
+					else {
+						chessCell[r, c]->BackColor = System::Drawing::Color::FromArgb(180, System::Drawing::Color::Violet);
+					}
+				}
+			}
+		}
+		bool isCellH(int frow, int fcol) {
+			if (frow >= 0 && fcol >= 0 && frow < 8 && fcol < 8) {
+				return highlightedCells[frow, fcol];
+			}
+			return false;
+		}
+		void Highlight(int frow, int fcol) {
+			if (frow >= 0 && fcol >= 0 && frow < 8 && fcol < 8) {
+				chessCell[frow, fcol]->BackColor = System::Drawing::Color::Green;
+				highlightedCells[frow, fcol] = true;
+			}
+		}
+		void MoveFigure(int fRow, int fCol, int ToRow, int ToCol) {
+			BoardFigures[ToRow, ToCol] = BoardFigures[fRow, fCol];
+			BoardFigures[fRow, fCol] = nullptr;
+			if (BoardFigures[ToRow, ToCol] != nullptr) {
+				BoardFigures[ToRow, ToCol]->Row = ToRow;
+				BoardFigures[ToRow, ToCol]->Col = ToCol;
+			}
+			DrawFigyres();
+		}
 #pragma endregion
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -267,7 +307,79 @@ private: System::Void btnClose_Click(System::Object^ sender, System::EventArgs^ 
 }
 private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
+
+
+
+	void FigureMoves(int frow, int fcol, String^ Obj) {
+		if (Obj == "pawnWhite") {
+			if (frow == 6 && BoardFigures[frow - 2, fcol] == nullptr) {
+				Highlight(frow - 2, fcol);
+
+			}
+			if (frow > 0 && BoardFigures[frow - 1, fcol] == nullptr) {
+				Highlight(frow - 1, fcol);
+			}
+			if (frow > 0 && fcol < 7 && BoardFigures[frow - 1, fcol + 1] != nullptr) {
+				if (BoardFigures[frow - 1, fcol + 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(frow - 1, fcol + 1);
+				}
+			}
+			if (frow > 0 && fcol > 0 && BoardFigures[frow - 1, fcol - 1] != nullptr) {
+				if (BoardFigures[frow - 1, fcol - 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(frow - 1, fcol - 1);
+				}
+			}
+		}
+		if (Obj == "pawnBlack") {
+			if (frow == 1 && BoardFigures[frow + 2, fcol] == nullptr) {
+				Highlight(frow + 2, fcol);
+
+			}
+			if (frow < 7 && BoardFigures[frow + 1, fcol] == nullptr) {
+				Highlight(frow + 1, fcol);
+			}
+			if (frow > 0 && fcol < 7 && BoardFigures[frow + 1, fcol + 1] != nullptr) {
+				if (BoardFigures[frow + 1, fcol + 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(frow + 1, fcol + 1);
+				}
+			}
+			if (frow > 0 && fcol > 0 && BoardFigures[frow + 1, fcol - 1] != nullptr) {
+				if (BoardFigures[frow + 1, fcol - 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(frow + 1, fcol - 1);
+				}
+			}
+		}
+	}
+
+	cli::array<bool, 2>^ highlightedCells;
+	int selectedRow = -1;
+	int selectedCol = -1;
+
 private: System::Void chessCell_Click(System::Object^ sender, System::EventArgs^ e) {
+	PictureBox^ clickedCell = (PictureBox^)sender;
+	Tuple<int, int>^ coords = (Tuple<int, int>^)clickedCell->Tag;
+	int row = coords->Item1;
+	int col = coords->Item2;
+
+	if (isCellH(row, col)) {
+		MoveFigure(selectedRow, selectedCol, row, col);
+		ClearHighLights();
+		return;
+	}
+
+	if (BoardFigures[row, col] != nullptr) {
+		chessMtuci::Figure^ figure = BoardFigures[row, col];
+		String^ figureName = figure->Name;
+		ClearHighLights();
+		clickedCell->BackColor = System::Drawing::Color::Yellow;
+		FigureMoves(row, col, figureName);
+		selectedCol = col;
+		selectedRow = row;
+
+	}
+	else {
+		ClearHighLights();
+	}
 }
 private: System::Void chessCell_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
 }
