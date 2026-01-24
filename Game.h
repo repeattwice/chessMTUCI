@@ -430,6 +430,218 @@ private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Wi
 				}
 			}
 		}
+		if (Obj->Contains("bishop")) {
+			int NewRow = frow - 1;
+			int NewCol = fcol - 1;
+			while (NewRow >= 0 && NewCol >= 0) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow--;
+					NewCol--;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow + 1;
+			NewCol = fcol + 1;
+			while (NewRow < 8 && NewCol < 8) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow++;
+					NewCol++;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow + 1;
+			NewCol = fcol - 1;
+			while (NewRow < 8 && NewCol >= 0) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow++;
+					NewCol--;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow - 1;
+			NewCol = fcol + 1;
+			while (NewRow >= 0 && NewCol < 8) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow--;
+					NewCol++;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if (Obj->Contains("queen")) {
+			int NewRow = frow - 1;
+			while (NewRow >= 0) {
+				if (BoardFigures[NewRow, fcol] == nullptr) {
+					Highlight(NewRow, fcol);
+					NewRow -= 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[NewRow, fcol]->IsWhite) {
+					Highlight(NewRow, fcol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow + 1;
+			while (NewRow < 8) {
+				if (BoardFigures[NewRow, fcol] == nullptr) {
+					Highlight(NewRow, fcol);
+					NewRow += 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[NewRow, fcol]->IsWhite) {
+					Highlight(NewRow, fcol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			int NewCol = fcol - 1;
+			while (NewCol >= 0) {
+				if (BoardFigures[frow, NewCol] == nullptr) {
+					Highlight(frow, NewCol);
+					NewCol -= 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[frow, NewCol]->IsWhite) {
+					Highlight(frow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewCol = fcol + 1;
+			while (NewCol < 8) {
+				if (BoardFigures[frow, NewCol] == nullptr) {
+					Highlight(frow, NewCol);
+					NewCol += 1;
+				}
+				else if (BoardFigures[frow, fcol]->IsWhite != BoardFigures[frow, NewCol]->IsWhite) {
+					Highlight(frow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow - 1;
+			NewCol = fcol - 1;
+			while (NewRow >= 0 && NewCol >= 0) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow--;
+					NewCol--;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow + 1;
+			NewCol = fcol + 1;
+			while (NewRow < 8 && NewCol < 8) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow++;
+					NewCol++;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow + 1;
+			NewCol = fcol - 1;
+			while (NewRow < 8 && NewCol >= 0) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow++;
+					NewCol--;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+			NewRow = frow - 1;
+			NewCol = fcol + 1;
+			while (NewRow >= 0 && NewCol < 8) {
+				if (BoardFigures[NewRow, NewCol] == nullptr) {
+					Highlight(NewRow, NewCol);
+					NewRow--;
+					NewCol++;
+				}
+				else if (BoardFigures[NewRow, NewCol]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+					Highlight(NewRow, NewCol);
+					break;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if (Obj->Contains("king")) {
+			cli::array<int, 2>^ KingMoves;
+			KingMoves = gcnew array<int, 2>(8, 2) {
+				{1 , 0},
+				{-1 , 0},
+				{0 , 1},
+				{0 , -1},
+				{1 , 1},
+				{-1 , -1},
+				{1 , -1},
+				{-1 , 1}
+			};
+			for (int i = 0; i < 8; i++) {
+				if (frow + KingMoves[i, 0] >= 0 && frow + KingMoves[i, 0] < 8 && fcol + KingMoves[i, 1] >= 0 && fcol + KingMoves[i, 1] < 8) {
+					if (BoardFigures[frow + KingMoves[i, 0], fcol + KingMoves[i, 1]] == nullptr) {
+						Highlight(frow + KingMoves[i, 0], fcol + KingMoves[i, 1]);
+					}
+					else if (BoardFigures[frow + KingMoves[i, 0], fcol + KingMoves[i, 1]]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
+						Highlight(frow + KingMoves[i, 0], fcol + KingMoves[i, 1]);
+					}
+				}
+			}
+
+		}
 	}
 
 	cli::array<bool, 2>^ highlightedCells;
