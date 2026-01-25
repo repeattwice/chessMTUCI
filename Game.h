@@ -1,5 +1,7 @@
 #pragma once
 #include "FugureClass.h"
+#include "pawnFinaleWhite.h"
+#include "pawnFinaleBlack.h"
 
 namespace chessMTUCI {
 
@@ -163,10 +165,9 @@ namespace chessMTUCI {
 			this->lblMove->AutoSize = true;
 			this->lblMove->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMove->Location = System::Drawing::Point(536, 28);
-			this->lblMove->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblMove->Location = System::Drawing::Point(761, 58);
 			this->lblMove->Name = L"lblMove";
-			this->lblMove->Size = System::Drawing::Size(50, 24);
+			this->lblMove->Size = System::Drawing::Size(64, 29);
 			this->lblMove->TabIndex = 1;
 			this->lblMove->Text = L"Ход:";
 			// 
@@ -175,20 +176,19 @@ namespace chessMTUCI {
 			this->lblMoveNumber->AutoSize = true;
 			this->lblMoveNumber->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMoveNumber->Location = System::Drawing::Point(589, 28);
-			this->lblMoveNumber->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblMoveNumber->Location = System::Drawing::Point(831, 58);
 			this->lblMoveNumber->Name = L"lblMoveNumber";
-			this->lblMoveNumber->Size = System::Drawing::Size(20, 24);
+			this->lblMoveNumber->Size = System::Drawing::Size(26, 29);
 			this->lblMoveNumber->TabIndex = 2;
 			this->lblMoveNumber->Text = L"1";
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(9, 11);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
+			this->pictureBox1->Location = System::Drawing::Point(12, 14);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(482, 520);
+			this->pictureBox1->Size = System::Drawing::Size(643, 640);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -199,10 +199,10 @@ namespace chessMTUCI {
 			this->btnClose->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnClose->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->btnClose->Location = System::Drawing::Point(626, -1);
-			this->btnClose->Margin = System::Windows::Forms::Padding(2);
+			this->btnClose->Location = System::Drawing::Point(913, 0);
+			this->btnClose->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnClose->Name = L"btnClose";
-			this->btnClose->Size = System::Drawing::Size(22, 28);
+			this->btnClose->Size = System::Drawing::Size(29, 34);
 			this->btnClose->TabIndex = 4;
 			this->btnClose->Text = L"X";
 			this->btnClose->UseVisualStyleBackColor = false;
@@ -227,7 +227,8 @@ namespace chessMTUCI {
 				12.5F)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				12.5F)));
-			this->tableLayoutPanel1->Location = System::Drawing::Point(9, 10);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(12, 12);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 8;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
@@ -238,16 +239,16 @@ namespace chessMTUCI {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(482, 521);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(643, 641);
 			this->tableLayoutPanel1->TabIndex = 5;
 			this->tableLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Game::tableLayoutPanel1_Paint);
 			// 
 			// Game
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->ClientSize = System::Drawing::Size(648, 612);
+			this->ClientSize = System::Drawing::Size(941, 753);
 			this->ControlBox = false;
 			this->Controls->Add(this->btnClose);
 			this->Controls->Add(this->tableLayoutPanel1);
@@ -256,10 +257,11 @@ namespace chessMTUCI {
 			this->Controls->Add(this->lblMove);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"Game";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Шахматы";
+			this->Load += gcnew System::EventHandler(this, &Game::Game_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -298,6 +300,55 @@ namespace chessMTUCI {
 				BoardFigures[ToRow, ToCol]->Col = ToCol;
 			}
 			DrawFigyres();
+			// когда пешка доходит до конца
+			if (BoardFigures[ToRow, ToCol]->Name == "pawnWhite" && selectedRow == 1 && ToRow==0) {
+				pawnFinaleWhite^ pawnForm = gcnew pawnFinaleWhite();
+				if (pawnForm->ShowDialog(this) == System::Windows::Forms::DialogResult::OK)
+				{
+					pawnFinaleWhite::PieceType piece = pawnForm->SelectedPiece;
+
+					switch (piece)
+					{
+					case pawnFinaleWhite::PieceType::Queen:
+						BoardFigures[ToRow, ToCol]= gcnew chessMtuci::Figure(ToRow, ToCol, true, "queenWhite");
+						break;
+					case pawnFinaleWhite::PieceType::Rook:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, true, "rookWhite");
+						break;
+					case pawnFinaleWhite::PieceType::Bishop:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, true, "bishopWhite");
+						break;
+					case pawnFinaleWhite::PieceType::Knight:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, true, "knightWhite");
+						break;
+					}
+					DrawFigyres();
+				}
+			}
+			if (BoardFigures[ToRow, ToCol]->Name == "pawnBlack" && selectedRow == 6 && ToRow == 7) {
+				pawnFinaleBlack^ pawnForm = gcnew pawnFinaleBlack();
+				if (pawnForm->ShowDialog(this) == System::Windows::Forms::DialogResult::OK)
+				{
+					pawnFinaleBlack::PieceType piece = pawnForm->SelectedPiece;
+
+					switch (piece)
+					{
+					case pawnFinaleBlack::PieceType::Queen:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, false, "queenBlack");
+						break;
+					case pawnFinaleBlack::PieceType::Rook:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, false, "rookBlack");
+						break;
+					case pawnFinaleBlack::PieceType::Bishop:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, false, "bishopBlack");
+						break;
+					case pawnFinaleBlack::PieceType::Knight:
+						BoardFigures[ToRow, ToCol] = gcnew chessMtuci::Figure(ToRow, ToCol, false, "knightBlack");
+						break;
+					}
+					DrawFigyres();
+				}
+			}
 		}
 #pragma endregion
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -312,9 +363,8 @@ private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Wi
 
 	void FigureMoves(int frow, int fcol, String^ Obj) {
 		if (Obj == "pawnWhite") {
-			if (frow == 6 && BoardFigures[frow - 2, fcol] == nullptr) {
+			if (frow == 6 && BoardFigures[frow - 2, fcol] == nullptr && BoardFigures[frow - 1, fcol] == nullptr) {
 				Highlight(frow - 2, fcol);
-
 			}
 			if (frow > 0 && BoardFigures[frow - 1, fcol] == nullptr) {
 				Highlight(frow - 1, fcol);
@@ -328,10 +378,10 @@ private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Wi
 				if (BoardFigures[frow - 1, fcol - 1]->IsWhite != BoardFigures[frow, fcol]->IsWhite) {
 					Highlight(frow - 1, fcol - 1);
 				}
-			}
+			} 
 		}
 		if (Obj == "pawnBlack") {
-			if (frow == 1 && BoardFigures[frow + 2, fcol] == nullptr) {
+			if (frow == 1 && BoardFigures[frow + 2, fcol] == nullptr && BoardFigures[frow + 1, fcol] == nullptr) {
 				Highlight(frow + 2, fcol);
 
 			}
@@ -654,15 +704,17 @@ private: System::Void chessCell_Click(System::Object^ sender, System::EventArgs^
 	int row = coords->Item1;
 	int col = coords->Item2;
 
+	
 	if (isCellH(row, col)) {
 		MoveFigure(selectedRow, selectedCol, row, col);
 		ClearHighLights();
 		return;
 	}
 
+
 	if (BoardFigures[row, col] != nullptr) {
-		chessMtuci::Figure^ figure = BoardFigures[row, col];
-		String^ figureName = figure->Name;
+	chessMtuci::Figure^ figure = BoardFigures[row, col];
+	String^ figureName = figure->Name;
 		ClearHighLights();
 		clickedCell->BackColor = System::Drawing::Color::Yellow;
 		FigureMoves(row, col, figureName);
@@ -677,6 +729,8 @@ private: System::Void chessCell_Click(System::Object^ sender, System::EventArgs^
 private: System::Void chessCell_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void chessCell_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void Game_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

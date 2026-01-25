@@ -130,6 +130,12 @@
     <ClInclude Include="GUI.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="pawnFinaleBlack.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pawnFinaleWhite.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Game.resx">
@@ -137,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.resx">
       <DependentUpon>GUI.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pawnFinaleBlack.resx">
+      <DependentUpon>pawnFinaleBlack.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pawnFinaleWhite.resx">
+      <DependentUpon>pawnFinaleWhite.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
