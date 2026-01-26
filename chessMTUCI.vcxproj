@@ -121,6 +121,7 @@
     <ClCompile Include="FugureClass.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Autorization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FugureClass.h" />
@@ -128,6 +129,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="GUI.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Autorization.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="pawnFinaleBlack.h">
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI.resx">
       <DependentUpon>GUI.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Autorization.resx">
+      <DependentUpon>Autorization.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pawnFinaleBlack.resx">
       <DependentUpon>pawnFinaleBlack.h</DependentUpon>

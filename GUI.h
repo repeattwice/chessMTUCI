@@ -74,7 +74,7 @@ namespace chessMTUCI {
 			this->label1->Location = System::Drawing::Point(416, 50);
 			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(213, 52);
+			this->label1->Size = System::Drawing::Size(169, 39);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Шахматы";
 			// 
@@ -119,6 +119,7 @@ namespace chessMTUCI {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 4;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &GUI::pictureBox1_Click);
 			// 
 			// GUI
 			// 
@@ -153,5 +154,7 @@ namespace chessMTUCI {
 		Game^ gameForm = gcnew Game();
 		gameForm->Show();
 	}
+private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
