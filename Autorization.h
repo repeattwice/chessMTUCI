@@ -1,6 +1,6 @@
 #pragma once
-
 #include "GUI.h"
+#include "RegForm.h"
 
 namespace chessMTUCI {
 
@@ -114,6 +114,7 @@ namespace chessMTUCI {
 			this->EnterUsName->Name = L"EnterUsName";
 			this->EnterUsName->Size = System::Drawing::Size(327, 22);
 			this->EnterUsName->TabIndex = 3;
+			this->EnterUsName->TextChanged += gcnew System::EventHandler(this, &Autorization::EnterUsName_TextChanged);
 			// 
 			// EnterPasword
 			// 
@@ -123,6 +124,7 @@ namespace chessMTUCI {
 			this->EnterPasword->Name = L"EnterPasword";
 			this->EnterPasword->Size = System::Drawing::Size(327, 22);
 			this->EnterPasword->TabIndex = 4;
+			this->EnterPasword->TextChanged += gcnew System::EventHandler(this, &Autorization::EnterPasword_TextChanged);
 			// 
 			// Enter
 			// 
@@ -146,6 +148,7 @@ namespace chessMTUCI {
 			this->registration->TabIndex = 6;
 			this->registration->Text = L"Регистрация";
 			this->registration->UseVisualStyleBackColor = false;
+			this->registration->Click += gcnew System::EventHandler(this, &Autorization::registration_Click);
 			// 
 			// Autorization
 			// 
@@ -176,6 +179,15 @@ namespace chessMTUCI {
 private: System::Void Enter_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 	GUI^ choose = gcnew GUI();
+	choose->Show();
+}
+private: System::Void EnterUsName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void EnterPasword_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void registration_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	RegForm^ choose = gcnew RegForm();
 	choose->Show();
 }
 };
