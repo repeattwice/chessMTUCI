@@ -166,14 +166,11 @@ namespace chessMTUCI {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"Autorization";
 			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &Autorization::Autorization_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void Autorization_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
 	private: System::Void Autrization_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void Enter_Click(System::Object^ sender, System::EventArgs^ e) {

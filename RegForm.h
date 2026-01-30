@@ -9,6 +9,9 @@ namespace chessMTUCI {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Net;
+	using namespace System::Text;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Сводка для MyForm
@@ -146,15 +149,162 @@ namespace chessMTUCI {
 			this->Text = L"RegForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 #pragma endregion
+	private:
+		String^ SendHttpRequest(String^ url, String^ method, String^ jsonData) {
+			try {
+				HttpWebRequest^ request = dynamic_cast<HttpWebRequest^>(WebRequest::Create(url));
+				request->Method = method;
+				request->ContentType = "application/json";
+				request->Timeout = 5000;
+
+				if (method->ToUpper() == "POST" && jsonData->Length > 0) {
+					array<Byte>^ data = Encoding::UTF8->GetBytes(jsonData);
+					request->ContentLength = data->Length;
+
+					Stream^ stream = request->GetRequestStream();
+					stream->Write(data, 0, data->Length);
+					stream->Close();
+				}
+				HttpWebResponse^ response = dynamic_cast<HttpWebResponse^> (request->GetResponse());
+				StreamReader^ reader = gcnew StreamReader(response->GetResponseStream());
+				String^ result = reader->ReadToEnd();
+				reader->Close();
+				response->Close();
+				return result;
+			}
+			catch (WebException^ ex) {
+				if (ex->Response != nullptr) {
+					HttpWebResponse^ errorResponse = dynamic_cast<HttpWebResponse^>(ex->Response);
+					StreamReader^ reader = gcnew StreamReader(errorResponse->GetResponseStream());
+					String^ errorText = reader->ReadToEnd();
+					reader->Close();
+					return "{\"success\":false,\"message\":\"HTTP Error:" + errorResponse->StatusCode.ToString() + "\",\"error\":\"" + errorText + "\"}";
+				}
+				return "{\"success\":false,\"message\":\"Network error: " + ex->Message + "\"}";
+			}
+			catch (Exception^ ex) {
+				return "{\"success\":false,\"message\":\"Error: " + ex->Message + "\"}";
+			}
+		}
+
+		bool ParseJsonResponse(String^ jsonResponse, [Runtime::InteropServices::Out] String^% message) {
+			message = "";
+			try {
+				jsonResponse = jsonResponse->Trim();
+				Console::WriteLine("Parsing json: " + jsonResponse);
+				if (!jsonResponse->StartsWith("{") || !jsonResponse->EndsWith("}")) {
+					message = "Invalid json format: " + jsonResponse;
+					return false;
+				}
+				String^ cleanJson = jsonResponse->Replace(" ", "")->Replace("\t", "")->Replace("\n", "")->Replace("\r", "");
+				int successIndex = cleanJson->IndexOf("\"success\":");
+				if (successIndex == -1) {
+					message = "No 'success' field founf in: " + jsonResponse;
+					return false;
+				}
+				int valueStart = successIndex + 10;
+				String^ successValue = cleanJson->Substring(valueStart, 4);
+
+				bool isSuccess = false;
+				if (successValue->StartsWith("true")) {
+					isSuccess = true;
+				}
+				else if (successValue->StartsWith("false")) {
+					isSuccess = false;
+				}
+				else {
+					message = "Invalid success value: " + successValue;
+					return false;
+				}
+				int messageIndex = cleanJson->IndexOf("\"message\":\"");
+				if (messageIndex != -1) {
+					int messageStart = messageIndex + 11;
+					int messageEnd = cleanJson->IndexOf("\"", messageStart);
+					if (messageEnd > messageStart) {
+						message = cleanJson->Substring(messageStart, messageEnd - messageStart);
+					}
+					else {
+						message = isSuccess ? "Operation successful" : "Operation failed";
+					}
+				}
+				else {
+					messageIndex = cleanJson->IndexOf("\"message\":");
+					if (messageIndex != -1) {
+						int messageStart = messageIndex + 10;
+						int messageEnd = cleanJson->IndexOf(",", messageStart);
+						if (messageEnd == -1) {
+							messageEnd = cleanJson->IndexOf("}", messageStart);
+						}
+						if (messageEnd > messageStart) {
+							message = cleanJson->Substring(messageStart, messageEnd - messageStart);
+							message = message->Trim('\"');
+						}
+					}
+					else {
+						message = isSuccess ? "Success" : "Unknow error";
+					}
+				}
+				return isSuccess;
+			}
+			catch (Exception^ ex) {
+				message = "JSON parsing error: " + ex->Message + "\nResponse was: " + jsonResponse;
+				return false;
+			}
+
+		}
+
+
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void ConfirmReg_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Hide();
-		GUI^ choose = gcnew GUI();
-		choose->Show();
+		String^ username = UserName->Text->Trim();
+		String^ password = Pasword->Text->Trim();
+
+		if (String::IsNullOrEmpty(username)) {
+			MessageBox::Show("Введите username", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			UserName->Focus();
+			return;
+		}
+		if (username->Length < 3) {
+			MessageBox::Show("username должен состоять минимум из 3 символов ", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			UserName->Focus();
+			return;
+		}
+		if (password->Length < 6) {
+			MessageBox::Show("Пароль дожлен состоять минимум из 6 символов", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			Pasword->Focus();
+			return;
+		}
+		Cursor = Cursors::WaitCursor;
+		ConfirmReg->Enabled = false;
+
+		try {
+			String^ jsonData = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
+			String^ serverUrl = "http://localhost:8000/api/register";
+			MessageBox::Show("Отправляю запрос на: " + serverUrl + "\nДанные: " + jsonData, "Отладка", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			String^ response = SendHttpRequest(serverUrl, "POST", jsonData);
+			MessageBox::Show("Ответ сервера:\n" + response, "Ответ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			String^ message;
+			bool success = ParseJsonResponse(response, message);
+			if (success) {
+				MessageBox::Show(message + "\n\nТеперь вы можете входить используя вашу учетные данные.", "Регистрация прошла успешно", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				this->Hide();
+				GUI^ choose = gcnew GUI();
+				choose->Show();
+			}
+			else {
+				MessageBox::Show("Регистрация не удалась:\n" + message, "Ошибка регистрации", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Ошибка" + ex->Message, "Ошибка сети", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		finally {
+			Cursor = Cursors::Default;
+			ConfirmReg->Enabled = true;
+		}
 	}
 };
 }
