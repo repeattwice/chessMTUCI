@@ -283,9 +283,7 @@ namespace chessMTUCI {
 		try {
 			String^ jsonData = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
 			String^ serverUrl = "http://localhost:8000/api/register";
-			MessageBox::Show("Отправляю запрос на: " + serverUrl + "\nДанные: " + jsonData, "Отладка", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			String^ response = SendHttpRequest(serverUrl, "POST", jsonData);
-			MessageBox::Show("Ответ сервера:\n" + response, "Ответ", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			String^ message;
 			bool success = ParseJsonResponse(response, message);
 			if (success) {

@@ -10,7 +10,7 @@ namespace chessMtuci {
 	private:
 		int row;
 		int colomn;
-		bool color;// 0 - белый, 1 - черный
+		bool color;// 1 - белый, 0 - черный
 		String^ FigureName;
 		System::Drawing::Image^ figureImage;
 

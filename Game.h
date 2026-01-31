@@ -261,7 +261,6 @@ namespace chessMTUCI {
 			this->Name = L"Game";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Шахматы";
-			this->Load += gcnew System::EventHandler(this, &Game::Game_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -708,6 +707,7 @@ private: System::Void chessCell_Click(System::Object^ sender, System::EventArgs^
 	if (isCellH(row, col)) {
 		MoveFigure(selectedRow, selectedCol, row, col);
 		ClearHighLights();
+		CheckEnd();
 		return;
 	}
 
@@ -715,12 +715,14 @@ private: System::Void chessCell_Click(System::Object^ sender, System::EventArgs^
 	if (BoardFigures[row, col] != nullptr) {
 	chessMtuci::Figure^ figure = BoardFigures[row, col];
 	String^ figureName = figure->Name;
+	bool figureColor = figure->IsWhite;
 		ClearHighLights();
-		clickedCell->BackColor = System::Drawing::Color::Yellow;
-		FigureMoves(row, col, figureName);
-		selectedCol = col;
-		selectedRow = row;
-
+		if (CheckColor(figureColor) == true) {
+			clickedCell->BackColor = System::Drawing::Color::Yellow;
+			FigureMoves(row, col, figureName);
+			selectedCol = col;
+			selectedRow = row;
+		}
 	}
 	else {
 		ClearHighLights();
@@ -730,8 +732,42 @@ private: System::Void chessCell_MouseEnter(System::Object^ sender, System::Event
 }
 private: System::Void chessCell_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void Game_Load(System::Object^ sender, System::EventArgs^ e) {
-}
+	   int conter = 0;
+	   bool CheckColor(bool obj) {
+		   if (conter % 2 == 0 && obj == true) {
+			   conter++;
+			   return true;
+		   }
+		   else if (conter % 2 == 1 && obj == false) {
+			   conter++;
+			   return true;
+		   }
+	   }
+	   void CheckEnd() {
+		   bool BlackKing = false;
+		   bool WhiteKing = false;
+		   for (int i = 0; i < 8; i++) {
+			   for (int k = 0; k < 8; k++) {
+				   if (BoardFigures[i, k] != nullptr && BoardFigures[i, k]->Name == "kingWhite") {
+					   WhiteKing = true;
+				   }
+				   else if (BoardFigures[i, k] != nullptr && BoardFigures[i, k]->Name == "kingBlack") {
+					   BlackKing = true;
+				   }
+			   }
+		   }
+		   if (BlackKing == true && WhiteKing == true) {
+			   return;
+		   }
+		   else if (BlackKing == false) {
+			   MessageBox::Show("Белые победили", "Конец игры", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			   Application::Exit();
+		   }
+		   else if (WhiteKing == false) {
+			   MessageBox::Show("Черные победили", "Конец игры", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			   Application::Exit();
+		   }
+	   }
 };
 }
 

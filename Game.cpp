@@ -14,6 +14,6 @@ namespace chessMTUCI {
         if (row >= 0 && row < 8 && col >= 0 && col < 8 && chessCell != nullptr) {
             return chessCell[row, col];
         }
-        return nullptr;  // ДОБАВИТЬ возврат значения!
+        return nullptr;
     }
 }
