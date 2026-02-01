@@ -750,9 +750,19 @@ private: System::Void chessCell_MouseLeave(System::Object^ sender, System::Event
 			   for (int k = 0; k < 8; k++) {
 				   if (BoardFigures[i, k] != nullptr && BoardFigures[i, k]->Name == "kingWhite") {
 					   WhiteKing = true;
+					   if (CheckKing(true)) {
+						   chessCell[i, k]->BackColor = System::Drawing::Color::Red;
+						   chessCell[i, k]->Refresh();
+						   MessageBox::Show("Шах белому королю!", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					   }
 				   }
 				   else if (BoardFigures[i, k] != nullptr && BoardFigures[i, k]->Name == "kingBlack") {
 					   BlackKing = true;
+					   if (CheckKing(false)) {
+						   chessCell[i, k]->BackColor = System::Drawing::Color::Red;
+						   chessCell[i, k]->Refresh();
+						   MessageBox::Show("Шах черному королю!", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					   }
 				   }
 			   }
 		   }
@@ -760,14 +770,15 @@ private: System::Void chessCell_MouseLeave(System::Object^ sender, System::Event
 			   return;
 		   }
 		   else if (BlackKing == false) {
-			   MessageBox::Show("Белые победили", "Конец игры", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			   MessageBox::Show("Белые победили", "Конец игры", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			   Application::Exit();
 		   }
 		   else if (WhiteKing == false) {
-			   MessageBox::Show("Черные победили", "Конец игры", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			   MessageBox::Show("Черные победили", "Конец игры", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			   Application::Exit();
 		   }
 	   }
+	   bool CheckKing(bool isWhiteKing);
 };
 }
 
