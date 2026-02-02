@@ -1,0 +1,8 @@
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.vcxproj.AssemblyReference.cache
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.Game.resources
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.GUI.resources
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.vcxproj.GenerateResource.cache
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.pawnFinaleBlack.resources
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.pawnFinaleWhite.resources
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.Autorization.resources
+C:\Projects\alg\chessMTUCI\chessMTUCI\x64\Debug\chessMTUCI.RegForm.resources

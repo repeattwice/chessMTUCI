@@ -1,0 +1,10 @@
+^C:\PROJECTS\ALG\CHESSMTUCI\BUILD\CMAKEFILES\4D4CA7C612C771070DBB6FC34C0247A2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Projects/alg/chessMTUCI -BC:/Projects/alg/chessMTUCI/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Projects/alg/chessMTUCI/build/chessMTUCI.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,102 @@
+  chessMTUCI.Game.resources - Embedded, ContainedInManifestFile, 
+  chessMTUCI.GUI.resources - Embedded, ContainedInManifestFile, 
+  chessMTUCI.Autorization.resources - Embedded, ContainedInManifestFile, 
+  chessMTUCI.RegForm.resources - Embedded, ContainedInManifestFile, 
+  chessMTUCI.pawnFinaleBlack.resources - Embedded, ContainedInManifestFile, 
+  chessMTUCI.pawnFinaleWhite.resources - Embedded, ContainedInManifestFile, 
+ImageRuntimeVersion: v4.0.30319
+Assembly chessMTUCI, Version=0.0.*, Culture=Инвариантный язык (Инвариантная страна): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class chessMtuci.Figure: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32, Int32, Boolean, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Tuple`2[System.Int32,System.Int32][] PosibleMoves : Public
+  Properties:
+    System.Drawing.Image FigureImage 'get set' : 
+    System.String Name 'get ' : 
+    Boolean IsWhite 'get ' : 
+    System.Tuple`2[System.Int32,System.Int32] Position 'get set' : 
+    Int32 Col  'get set' : 
+    Int32 Row  'get set' : 
+  Methods:
+    get_Row(): PrivateScope, Public, HideBySig, SpecialName
+    set_Row(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Col(): PrivateScope, Public, HideBySig, SpecialName
+    set_Col(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Position(): PrivateScope, Public, HideBySig, SpecialName
+    set_Position(Tuple`2): PrivateScope, Public, HideBySig, SpecialName
+    get_IsWhite(): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    get_FigureImage(): PrivateScope, Public, HideBySig, SpecialName
+    set_FigureImage(Image): PrivateScope, Public, HideBySig, SpecialName
+    Highlite(): PrivateScope, Public, HideBySig
+    MoveTo(Int32, Int32): PrivateScope, Public, HideBySig
+    CanMoveByRules(): PrivateScope, Public, HideBySig
+    LoadFigureImage(): PrivateScope, Public, HideBySig
+Class chessMTUCI.pawnFinaleWhite: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    PieceType SelectedPiece 'get ' : 
+  Methods:
+    get_SelectedPiece(): PrivateScope, Public, HideBySig, SpecialName
+Struct chessMTUCI.pawnFinaleWhite+PieceType: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    PieceType Queen = 0 : Public, Static, Literal, HasDefault
+    PieceType Rook = 1 : Public, Static, Literal, HasDefault
+    PieceType Bishop = 2 : Public, Static, Literal, HasDefault
+    PieceType Knight = 3 : Public, Static, Literal, HasDefault
+Class chessMTUCI.pawnFinaleBlack: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    PieceType SelectedPiece 'get ' : 
+  Methods:
+    get_SelectedPiece(): PrivateScope, Public, HideBySig, SpecialName
+Struct chessMTUCI.pawnFinaleBlack+PieceType: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    PieceType Queen = 0 : Public, Static, Literal, HasDefault
+    PieceType Rook = 1 : Public, Static, Literal, HasDefault
+    PieceType Bishop = 2 : Public, Static, Literal, HasDefault
+    PieceType Knight = 3 : Public, Static, Literal, HasDefault
+Class chessMTUCI.Game: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    chessMtuci.Figure[,] BoardFigures : Public
+  Methods:
+    GetChessCell(Int32, Int32): PrivateScope, Public, HideBySig
+    AddPictureBoxesToTableLayout(): PrivateScope, Public, HideBySig
+    InitializaBoard(): PrivateScope, Public, HideBySig
+    DrawFigyres(): PrivateScope, Public, HideBySig
+Class chessMTUCI.GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class chessMTUCI.RegForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class chessMTUCI.Autorization: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

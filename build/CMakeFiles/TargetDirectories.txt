@@ -1,0 +1,3 @@
+C:/Projects/alg/chessMTUCI/build/CMakeFiles/chessMTUCI.dir
+C:/Projects/alg/chessMTUCI/build/CMakeFiles/ALL_BUILD.dir
+C:/Projects/alg/chessMTUCI/build/CMakeFiles/ZERO_CHECK.dir
